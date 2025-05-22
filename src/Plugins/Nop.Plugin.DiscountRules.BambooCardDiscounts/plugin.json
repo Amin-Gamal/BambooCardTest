@@ -1,0 +1,11 @@
+﻿{
+  "Group": "DiscountRules",
+  "FriendlyName": "Bamboo Card Discounts",
+  "SystemName": "DiscountRules.BambooCardDiscounts",
+  "Version": "1.00",
+  "SupportedVersions": ["4.80"],
+  "Author": "Amin Gamal",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.DiscountRules.BambooCardDiscounts.dll",
+  "Description": "A plugin that applies a custom discount based on customer order history."
+}
