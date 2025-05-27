@@ -1,9 +1,9 @@
 ﻿{
   "Group": "DiscountRules",
-  "FriendlyName": "Bamboo Card Discounts",
-  "SystemName": "DiscountRules.BambooCardDiscounts",
+  "FriendlyName": "Bamboo Card Discounts based on customer order history.",
+  "SystemName": "DiscountRequirement.MustHaveNumberOfOrders",
   "Version": "1.00",
-  "SupportedVersions": ["4.80"],
+  "SupportedVersions": [ "4.80" ],
   "Author": "Amin Gamal",
   "DisplayOrder": 1,
   "FileName": "Nop.Plugin.DiscountRules.BambooCardDiscounts.dll",
