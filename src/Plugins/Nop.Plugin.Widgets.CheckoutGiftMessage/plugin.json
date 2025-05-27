@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Gift Message on Checkout.",
+  "SystemName": "Widgets.CheckoutGiftMessage",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.80" ],
+  "Author": "Amin Gamal",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.CheckoutGiftMessage.dll",
+  "Description": "Enhance the checkout experience with a Gift Message."
+}
