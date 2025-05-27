@@ -1,0 +1,105 @@
+@model RequirementModel
+
+@{
+    Layout = "";
+}
+
+<script>
+
+    $(document).ready(function () {
+
+       console.log('@(Model.RequirementId)');
+
+       $('#saveminimumorder@(Model.RequirementId)').on('click', function(){
+           var minimumNumberOfOrders = $("#@Html.IdFor(model => model.MinimumNumberOfOrders)").val();
+           var discountId = @Model.DiscountId;
+           var requirementId = @Model.RequirementId;
+
+           var postData = {
+               DiscountId: discountId,
+               RequirementId: requirementId,
+               MinimumNumberOfOrders: minimumNumberOfOrders
+           };
+           addAntiForgeryToken(postData);
+
+           $.ajax({
+               cache: false,
+               type: "POST",
+               url: "@(Url.Action("Configure", "BambooCardDiscounts"))",
+               data: postData,
+               success: function (data, textStatus, jqXHR) {
+
+                   var $alertInfoEl = $("#saveminimumorderAlert-info");
+                   let response = jqXHR.responseJSON;
+                   if (response instanceof Object && response.hasOwnProperty('Errors')) {
+                       var errorMessages = '';
+                       $.each(response.Errors, function (i, error) {
+                           errorMessages += error;
+                           if (response.Errors.length - 1 != i)
+                               errorMessages += '</br>';
+                       });
+                       $alertInfoEl.html(errorMessages);
+                       $("#saveminimumorderAlert").trigger("click");
+
+                       return;
+                   }
+
+                   $('#pnl-save-requirement-result@(Model.RequirementId)').fadeIn("slow").delay(1000).fadeOut("slow");
+                   //notify parent if it's a new requirement
+                   @if (Model.RequirementId == 0)
+                   {
+                                   <text>$("#discountRequirementContainer").trigger('nopnewdiscountruleadded', [data.NewRequirementId]);</text>
+                   }
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   var $alertInfoEl = $("#saveminimumorderAlert-info");
+
+                   // display default error
+                   $alertInfoEl.html('@T("Admin.Promotions.Discounts.Requirements.FailedToSave")');
+
+                   $("#saveminimumorderAlert").trigger("click");
+               }
+           });
+       })
+
+
+
+    });
+
+
+
+
+</script>
+
+
+
+<div class="form-group row">
+    <div class="col-md-3 requirement-label-col">
+        <nop-label asp-for="MinimumNumberOfOrders" />
+    </div>
+    <div class="col-md-9 requirement-data-col">
+        <div class="requirement-data-input">
+            <nop-editor asp-for="MinimumNumberOfOrders" asp-required="true" />
+            <span asp-validation-for="MinimumNumberOfOrders"></span>
+        </div>
+
+        <div class="requirement-data-buttons">
+            <button type="button" id="saveminimumorder@(Model.RequirementId)" class="btn btn-primary">@T("Admin.Common.Save")</button>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <div class="offset-md-3 col-md-9 requirement-messages-col">
+        <div id="pnl-save-requirement-result@(Model.RequirementId)" style="display: none;" class="text-green margin-t-5">
+            @T("Admin.Promotions.Discounts.Requirements.Saved")
+        </div>
+    </div>
+</div>
+<nop-alert asp-alert-id="saveminimumorderAlert" />
+
+
+<style>
+    .requirement-data-buttons{
+        margin-left: 10%;
+    }
+</style>
