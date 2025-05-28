@@ -5,7 +5,7 @@ namespace Nop.Plugin.Misc.ProductAttributeSearch.Areas.Admin.Models
 {
     public record ProductAttributeSearchModel : BaseSearchModel
     {
-        [NopResourceDisplayName("Admin.Catalog.ProductAttribute.Fields.SearchProductAttributeName")]
+        [NopResourceDisplayName("Plugins.Misc.ProductAttributeSearch.Fields.SearchProductAttributeName")]
         public string SearchProductAttributeName { get; set; }
     }
 }
