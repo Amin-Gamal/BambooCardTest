@@ -12,14 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Areas\Admin\Views\ProductAttribute\List.cshtml" />
+    <None Remove="Areas\Admin\Views\BambooProductAttribute\List.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\ProductAttribute\List.cshtml">
+    <Content Include="Areas\Admin\Views\BambooProductAttribute\List.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="logo.jpg">
@@ -39,10 +39,6 @@
   <ItemGroup>
     <ProjectReference Include="$(SolutionDir)\Presentation\Nop.Web\Nop.Web.csproj" />
     <ClearPluginAssemblies Include="$(SolutionDir)\Build\ClearPluginAssemblies.proj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />    
   </ItemGroup>
  
   <!-- This target execute after "Build" target -->
