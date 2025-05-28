@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Misc",
+  "FriendlyName": "Product Attribute Search By Name.",
+  "SystemName": "Misc.ProductAttributeSearch",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.80" ],
+  "Author": "Amin Gamal",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.ProductAttributeSearch.dll",
+  "Description": "Allow to search by Name on the product attribute page (admin area)."
+}
