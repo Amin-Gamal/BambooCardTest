@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Nop.Plugin.Misc.ProductAttributeSearch.Areas.Admin.Factories;
 using Nop.Plugin.Misc.ProductAttributeSearch.Areas.Admin.Models;
 using Nop.Services.Catalog;
 using Nop.Services.Localization;
@@ -13,8 +14,15 @@ namespace Nop.Plugin.Misc.ProductAttributeSearch.Areas.Admin.Controllers
 {
     public class BambooProductAttributeController : Nop.Web.Areas.Admin.Controllers.ProductAttributeController
     {
-        public BambooProductAttributeController(ICustomerActivityService customerActivityService, ILocalizationService localizationService, ILocalizedEntityService localizedEntityService, INotificationService notificationService, IPermissionService permissionService, IProductAttributeModelFactory productAttributeModelFactory, IProductAttributeService productAttributeService) : base(customerActivityService, localizationService, localizedEntityService, notificationService, permissionService, productAttributeModelFactory, productAttributeService)
+        private readonly IBambooProductAttributeModelFactory _bambooProductAttributeModelFactory;
+
+        public BambooProductAttributeController(ICustomerActivityService customerActivityService, ILocalizationService localizationService, ILocalizedEntityService localizedEntityService, INotificationService notificationService, IPermissionService permissionService, IProductAttributeModelFactory productAttributeModelFactory, IProductAttributeService productAttributeService,
+
+            IBambooProductAttributeModelFactory bambooProductAttributeModelFactory
+
+            ) : base(customerActivityService, localizationService, localizedEntityService, notificationService, permissionService, productAttributeModelFactory, productAttributeService)
         {
+            _bambooProductAttributeModelFactory = bambooProductAttributeModelFactory;
         }
 
         public override IActionResult Index()
@@ -33,9 +41,14 @@ namespace Nop.Plugin.Misc.ProductAttributeSearch.Areas.Admin.Controllers
             return View("~/Plugins/Misc.ProductAttributeSearch/Areas/Admin/Views/BambooProductAttribute/List.cshtml", searchModel);
         }
 
-        public async Task<IActionResult> List(ProductAttributeSearchModel searchModel)
+        [HttpPost]
+        [CheckPermission(StandardPermission.Catalog.PRODUCT_ATTRIBUTES_VIEW)]
+        public virtual async Task<IActionResult> BambooProductAttributeList(ProductAttributeSearchModel searchModel)
         {
-            return await base.List();
+            //prepare model
+            var model = await _bambooProductAttributeModelFactory.PrepareProductAttributeListModelAsync(searchModel);
+
+            return Json(model);
         }
     }
 }
