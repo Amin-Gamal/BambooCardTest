@@ -1,16 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Nop.Plugin.Misc.ProductAttributeSearch.Areas.Admin.Models;
 using Nop.Services.Catalog;
 using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Messages;
 using Nop.Services.Security;
 using Nop.Web.Areas.Admin.Factories;
-using Nop.Web.Areas.Admin.Models.Catalog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Nop.Web.Framework.Mvc.Filters;
 
 namespace Nop.Plugin.Misc.ProductAttributeSearch.Areas.Admin.Controllers
 {
@@ -20,22 +17,25 @@ namespace Nop.Plugin.Misc.ProductAttributeSearch.Areas.Admin.Controllers
         {
         }
 
-
         public override IActionResult Index()
         {
             return base.Index();
         }
 
-        public override Task<IActionResult> List()
+        [CheckPermission(StandardPermission.Catalog.PRODUCT_ATTRIBUTES_VIEW)]
+        public override async Task<IActionResult> List()
         {
-            return base.List();
+            ProductAttributeSearchModel searchModel = new();
+
+            //prepare page parameters
+            searchModel.SetGridPageSize();
+
+            return View("~/Plugins/Misc.ProductAttributeSearch/Areas/Admin/Views/BambooProductAttribute/List.cshtml", searchModel);
         }
 
-        public override Task<IActionResult> List(ProductAttributeSearchModel searchModel)
+        public async Task<IActionResult> List(ProductAttributeSearchModel searchModel)
         {
-            return base.List(searchModel);
+            return await base.List();
         }
-
-       
     }
 }
