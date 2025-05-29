@@ -14,8 +14,9 @@
   <ItemGroup>
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
+    <None Remove="Views\Checkout\OnePageCheckout.cshtml" />
+    <None Remove="Views\Checkout\OpcGiftMessage.cshtml" />
     <None Remove="Views\_ViewImports.cshtml" />
-    <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
