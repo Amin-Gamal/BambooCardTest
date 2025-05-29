@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Nop.Core.Configuration;
 using Nop.Services.Configuration;
 using Nop.Web.Models.ShoppingCart;
 
@@ -29,7 +28,7 @@ namespace Nop.Plugin.Widgets.CheckoutGiftMessage.Filters
 
             ViewResult viewResult = context.Result as ViewResult;
 
-            if(viewResult is null)
+            if (viewResult is null)
                 return;
 
             ShoppingCartModel model = viewResult.Model as ShoppingCartModel;
@@ -49,9 +48,8 @@ namespace Nop.Plugin.Widgets.CheckoutGiftMessage.Filters
                 return;
 
             model.CheckoutAttributes.Remove(giftMessageAttribute);
+
             base.OnActionExecuted(context);
         }
-
-      
     }
 }
