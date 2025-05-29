@@ -1,44 +1,38 @@
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Orders;
-using Nop.Plugin.Widgets.CheckoutGiftMessage.Components;
+
 using Nop.Services.Attributes;
-using Nop.Services.Cms;
 using Nop.Services.Configuration;
+using Nop.Services.Localization;
 using Nop.Services.Plugins;
-using Nop.Web.Framework.Infrastructure;
 
 namespace Nop.Plugin.Widgets.CheckoutGiftMessage
 {
-    public class CheckoutGiftMessagePlugin : BasePlugin, IWidgetPlugin
+    public class CheckoutGiftMessagePlugin : BasePlugin
     {
         private readonly IAttributeService<CheckoutAttribute, CheckoutAttributeValue> _checkoutAttributeService;
         private readonly ISettingService _settingService;
+        private readonly ILocalizationService _localizationService;
 
-        public CheckoutGiftMessagePlugin(IAttributeService<CheckoutAttribute, CheckoutAttributeValue> checkoutAttributeService, ISettingService settingService)
+        public CheckoutGiftMessagePlugin(IAttributeService<CheckoutAttribute, CheckoutAttributeValue> checkoutAttributeService, 
+                                         ISettingService settingService,
+                                         ILocalizationService localizationService)
         {
             _checkoutAttributeService = checkoutAttributeService;
             _settingService = settingService;
-        }
-
-        public bool HideInWidgetList => false;
-
-        public Type GetWidgetViewComponent(string widgetZone)
-        {
-            return typeof(WidgetGiftMessageViewComponent);
-        }
-
-        public async Task<IList<string>> GetWidgetZonesAsync()
-        {
-            List<string> widgetZones = new List<string>
-            {
-                PublicWidgetZones.OrderSummaryCartFooter
-            };
-
-            return widgetZones;
+            _localizationService = localizationService;
         }
 
         public override async Task InstallAsync()
         {
+            //locales
+            await _localizationService.AddOrUpdateLocaleResourceAsync(new Dictionary<string, string>
+            {
+                ["Plugins.Widgets.CheckoutGiftMessage.EnterGiftMessage"] = "Enter Your gift's message",
+                ["Plugins.Widgets.CheckoutGiftMessage.GiftMessage"] = "Gift Message",
+                
+            });
+
             CheckoutAttribute giftMessageCheckoutAttribute = new CheckoutAttribute
             {
                 Name = "Gift Message",
@@ -57,6 +51,8 @@ namespace Nop.Plugin.Widgets.CheckoutGiftMessage
 
         public override async Task UninstallAsync()
         {
+            await _localizationService.DeleteLocaleResourceAsync("Plugins.Widgets.CheckoutGiftMessage");
+
             int giftMessageCheckoutAttributeId = await _settingService.GetSettingByKeyAsync<int>(Defaults.GIFT_CARD_CHECKOUT_ATTRIBUTE_SETTING_KEY);
 
             if (giftMessageCheckoutAttributeId == 0)
