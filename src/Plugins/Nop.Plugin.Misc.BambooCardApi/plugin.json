@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Bamboo card Api.",
+  "SystemName": "Misc.BambooCardApi",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.80" ],
+  "Author": "Amin Gamal",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.BambooCardApi.dll",
+  "Description": "Api for retrieving order details.."
+}
