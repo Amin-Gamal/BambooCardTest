@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "c86a0a1a-4000-44f9-8bee-6dfb4635e3e3",
+		"name": "BambooCard Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4208855"
+	},
+	"item": [
+		{
+			"name": "authenticate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@geleg.com\",\r\n    \"password\": \"123456\",\r\n    \"remember_me\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}authenticate",
+					"host": [
+						"{{base_url}}authenticate"
+					],
+					"query": [
+						{
+							"key": "Email",
+							"value": "admin@geleg.com",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrdersDetailsByEmail",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOiIxNzQ4ODQ1MTM1IiwiZXhwIjoiMTc1MTQzNzEzNSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMDM5MzhhMGEtNTZmYy00N2I1LThkY2UtZjBjNWIzMTM5ZjAwIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AZ2VsZWcuY29tIn0.sYQhfB2VtftYkpmCyERb8Z76L3sKF12MfQogjJqtrZM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}BambooOrders/customerOrders?email=admin@geleg.com&pageindex=1&pagesize=5",
+					"host": [
+						"{{base_url}}BambooOrders"
+					],
+					"path": [
+						"customerOrders"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "admin@geleg.com"
+						},
+						{
+							"key": "pageindex",
+							"value": "1",
+							"description": "\n"
+						},
+						{
+							"key": "pagesize",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
