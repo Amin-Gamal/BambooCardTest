@@ -10,6 +10,7 @@ This repository contains a custom NopCommerce solution developed as part of a te
 - [Order Retrieval API](https://github.com/Amin-Gamal/BambooCardTest/tree/main/src/Plugins/Nop.Plugin.Misc.BambooCardApi) for retrieving orders by email (JWT protected)
 
 username: admin@geleg.com
+
 password: 123456
 
 ## How to run BambooCardTest in Docker
