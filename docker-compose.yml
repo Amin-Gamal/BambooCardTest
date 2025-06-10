@@ -1,27 +1,23 @@
+version: '3.8'
 services:
-    bamboocardtest_web:
-        image: ${DOCKER_REGISTRY-}bamboocardtest
-        build: 
-            context: .
-            dockerfile: Dockerfile
-        container_name: bamboocardtest
-        environment:
-            - ASPNETCORE_URLS=http://*:8080
-        ports:
-            - "8080:8080"        
-        depends_on:
-            - bamboocardtest_database
-            
-            
-    bamboocardtest_database:
-        image: "mcr.microsoft.com/mssql/server"
-        container_name: bamboocard_db
-        ports:
-            - "1435:1433"
-        environment:
-            SA_PASSWORD: "BambooCard123456"
-            ACCEPT_EULA: "Y"
-            MSSQL_PID: "Express"
+  db:
+    image: gelegit/bamboocardtest_db
+    container_name: bamboocard_db
+    ports:
+      - "1435:1433"
+    networks:
+      bamboocard-app:
+        aliases:
+          - bamboocardtest_database
 
-volumes:
-  nopcommerce_data:            
+  web:
+    image: gelegit/bamboocardtest
+    container_name: bamboocard_web
+    networks:
+      - bamboocard-app
+    ports:
+      - "8080:8080"
+
+networks:
+  bamboocard-app:
+    driver: bridge
