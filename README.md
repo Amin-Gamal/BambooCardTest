@@ -9,6 +9,9 @@ This repository contains a custom NopCommerce solution developed as part of a te
 - [Admin search enhancement](https://github.com/Amin-Gamal/BambooCardTest/tree/main/src/Plugins/Nop.Plugin.Misc.ProductAttributeSearch) for product attributes
 - [Order Retrieval API](https://github.com/Amin-Gamal/BambooCardTest/tree/main/src/Plugins/Nop.Plugin.Misc.BambooCardApi) for retrieving orders by email (JWT protected)
 
+username: admin@geleg.com
+password: 123456
+
 ## How to run BambooCardTest in Docker
 Use docker-compose.yml file [download here](https://github.com/Amin-Gamal/BambooCardTest/blob/main/docker-compose.yml) 
 
