@@ -13,3 +13,7 @@ This repository contains a custom NopCommerce solution developed as part of a te
 Use docker-compose.yml file [download here](https://github.com/Amin-Gamal/BambooCardTest/blob/main/docker-compose.yml) 
 
 use this command to run the container "docker compose up"
+
+## Postman Collection
+A Postman collection file is included for testing:
+[BambooCard Api.postman_collection.json](https://github.com/Amin-Gamal/BambooCardTest/blob/main/BambooCard%20Api.postman_collection.json)
